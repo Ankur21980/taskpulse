@@ -1,6 +1,6 @@
-Standup — June 9, 2026
+Sprint Planning — June 9, 2026 (3-week sprint ends June 30)
 
-Rahul: The API migration is blocked. Priya, can you review the Q3 budget proposal by Friday?
-Priya: Sure. Alex, please send the client update email today.
-Alex: Will do. Sam needs to schedule user interviews for next week.
-Sam: I'll book five sessions by Wednesday.
+Hiren: I'll own the dashboard responsive layout — target done by end of week 2.
+Prerana: Auth API endpoints need to ship by June 20 so frontend can integrate.
+Anisha: I'll build the settings page and shared form components this sprint.
+Gowtham: I can write unit tests for the upload flow with Anisha reviewing.

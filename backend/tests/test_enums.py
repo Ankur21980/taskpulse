@@ -1,4 +1,4 @@
-from app.models import TaskPriority, TaskStatus
+from app.enums import TaskPriority, TaskStatus
 
 
 def test_task_status_values():

@@ -4,23 +4,22 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.config import settings
-from app.database import Base, SessionLocal, engine
+from app.database import close, connect, create_indexes, get_database, ping
 from app.routers import sources, tasks, teams
 from app.seed import seed_demo_data
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    Base.metadata.create_all(bind=engine)
-    db = SessionLocal()
-    try:
-        seed_demo_data(db)
-    finally:
-        db.close()
+    connect()
+    db = get_database()
+    create_indexes(db)
+    seed_demo_data(db)
     yield
+    close()
 
 
-app = FastAPI(title="TaskPulse API", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title="TaskPulse API", version="0.2.0", lifespan=lifespan)
 
 origins = [o.strip() for o in settings.cors_origins.split(",")]
 app.add_middleware(
@@ -38,4 +37,4 @@ app.include_router(teams.router)
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "ok", "db": "connected" if ping() else "disconnected"}
