@@ -1,0 +1,6 @@
+Standup — June 9, 2026
+
+Rahul: The API migration is blocked. Priya, can you review the Q3 budget proposal by Friday?
+Priya: Sure. Alex, please send the client update email today.
+Alex: Will do. Sam needs to schedule user interviews for next week.
+Sam: I'll book five sessions by Wednesday.
