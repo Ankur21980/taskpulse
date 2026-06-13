@@ -45,6 +45,11 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
             autoFocus
           />
           <Select
+            items={[
+              { value: "high", label: "high" },
+              { value: "medium", label: "medium" },
+              { value: "low", label: "low" },
+            ]}
             value={priority}
             onValueChange={(v) => setPriority(v as "high" | "medium" | "low")}
           >
@@ -52,9 +57,15 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="high">high</SelectItem>
-              <SelectItem value="medium">medium</SelectItem>
-              <SelectItem value="low">low</SelectItem>
+              <SelectItem value="high" label="high">
+                high
+              </SelectItem>
+              <SelectItem value="medium" label="medium">
+                medium
+              </SelectItem>
+              <SelectItem value="low" label="low">
+                low
+              </SelectItem>
             </SelectContent>
           </Select>
           <AssigneeSelect
