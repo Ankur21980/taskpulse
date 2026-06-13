@@ -69,8 +69,17 @@ export const useTaskStore = create<TaskStore>((set, get) => ({
   setToast: (msg) => set({ toast: msg }),
 
   loadMembers: async () => {
-    const members = await api.getTeamMembers();
-    set({ members });
+    try {
+      const members = await api.getTeamMembers();
+      set({ members, error: null });
+    } catch (e) {
+      set({
+        members: [],
+        error:
+          (e as Error).message ||
+          "Could not load team members. Check VITE_API_URL and backend CORS_ORIGINS, then redeploy.",
+      });
+    }
   },
 
   loadSources: async () => {

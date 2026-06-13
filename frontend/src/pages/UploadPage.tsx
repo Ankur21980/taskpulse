@@ -154,7 +154,20 @@ export function UploadPage() {
         </TabsContent>
       </Tabs>
 
-      {!canExtract && (
+      {members.length === 0 && !error && (
+        <p className="text-sm text-muted-foreground">Loading team members…</p>
+      )}
+
+      {members.length === 0 && error && (
+        <p className="text-sm text-destructive">
+          {error} — API calls may be pointing at the wrong host in production. Set{" "}
+          <code className="text-xs">VITE_API_URL=https://taskpulse-6.onrender.com/api</code> on
+          Render and redeploy; set backend{" "}
+          <code className="text-xs">CORS_ORIGINS</code> to your frontend URL.
+        </p>
+      )}
+
+      {!canExtract && members.length > 0 && (
         <p className="text-sm text-warning font-medium">Select at least one team member to extract tasks.</p>
       )}
 

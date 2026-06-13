@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: taskpulse-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
+      - key: GEMINI_TIMEOUT_SECONDS
+        value: "120"
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB_NAME
+        value: taskpulse
+      - key: UPLOAD_DIR
+        value: ./uploads
+      - key: CORS_ORIGINS
+        sync: false
+
+  - type: web
+    name: taskpulse-web
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: VITE_API_URL
+        sync: false

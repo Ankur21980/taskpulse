@@ -45,6 +45,57 @@ Open http://localhost:5173
 
 Create a key at https://aistudio.google.com/apikey and set `GEMINI_API_KEY` in `backend/.env`.
 
+## Deploy for free
+
+### Backend (Render)
+
+**Option A — Docker (recommended, avoids Python 3.14 build issues)**
+
+1. Push this repo to GitHub.
+2. Render → **New Web Service** → connect repo.
+3. Settings:
+   - **Root directory:** `backend`
+   - **Runtime:** `Docker`
+   - **Dockerfile path:** `Dockerfile`
+4. Set env vars from `backend/.env.example` (`GEMINI_API_KEY`, `MONGODB_URI`, `CORS_ORIGINS`, etc.).
+5. In MongoDB Atlas → **Network Access**, allow `0.0.0.0/0`.
+6. Verify: `https://<your-api>.onrender.com/health`
+
+**Option B — Native Python**
+
+1. Same as above, but **Runtime:** `Python`.
+2. **Build command:** `bash render-build.sh`
+3. **Start command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+4. **Required env var:** `PYTHON_VERSION=3.12.11` (Render defaults to 3.14 without this).
+
+Or use **Blueprint** with `render.yaml` at the repo root (Docker-based).
+
+### Frontend (Render Static Site)
+
+1. Render → **New → Static Site** → connect the same GitHub repo.
+2. Settings:
+   - **Root directory:** `frontend`
+   - **Build command:** `npm install && npm run build`
+   - **Publish directory:** `dist`
+3. **Environment** → add:
+   ```
+   VITE_API_URL=https://<your-api>.onrender.com/api
+   ```
+   (Use your real backend URL from the Web Service.)
+4. Deploy. SPA routing is in `render.yaml` routes; `public/_redirects` is a fallback.
+5. Copy your Static Site URL (e.g. `https://taskpulse-web.onrender.com`).
+6. On the **backend** service → **Environment** → set:
+   ```
+   CORS_ORIGINS=https://<your-frontend>.onrender.com
+   ```
+7. Redeploy the backend so CORS picks up the frontend URL.
+
+**Node version:** Vite 8 needs Node 20+. Render reads `frontend/.node-version` (`22.16.0`).
+
+Also works on **Vercel** or **Netlify** — see `vercel.json` / `netlify.toml`.
+
+Local dev is unchanged — leave `VITE_API_URL` unset and run backend + `npm run dev`.
+
 ## Demo walkthrough
 
 1. Open http://localhost:5173
