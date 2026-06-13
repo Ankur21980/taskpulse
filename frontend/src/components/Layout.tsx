@@ -16,45 +16,48 @@ export function Layout() {
   const setToast = useTaskStore((s) => s.setToast);
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-border bg-card">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-4">
-          <h1 className="text-xl font-semibold text-highlight">TaskPulse</h1>
-          <nav className="flex gap-1">
-            {nav.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={cn(
-                  "rounded-lg px-3 py-1.5 text-sm transition-colors",
-                  location.pathname === item.to
-                    ? "bg-primary font-semibold text-primary-foreground shadow-sm"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                )}
-              >
-                {item.label}
-              </Link>
-            ))}
+    <div className="app-background min-h-screen w-full text-white">
+      <div className="relative min-h-screen w-full">
+        <header className="relative flex w-full items-center justify-between border-b border-[#1f2937] px-6 py-6 md:px-12">
+          <span className="text-xl font-bold leading-7 text-white">TaskPulse</span>
+          <nav className="flex items-center gap-4 md:gap-8">
+            {nav.map((item) => {
+              const active = location.pathname === item.to;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={cn(
+                    "text-sm leading-5 transition-colors",
+                    active
+                      ? "rounded-lg bg-[#2563eb] px-4 py-2 font-medium text-white hover:bg-[#1d4ed8]"
+                      : "text-white/90 hover:text-white"
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </nav>
-        </div>
-      </header>
+        </header>
 
-      {toast && (
-        <div className="mx-auto mt-4 max-w-5xl px-4">
-          <Alert className="border-success/40 bg-success/20 text-success">
-            <AlertDescription className="flex items-center justify-between gap-4">
-              <span>{toast}</span>
-              <Button variant="ghost" size="sm" onClick={() => setToast(null)}>
-                Dismiss
-              </Button>
-            </AlertDescription>
-          </Alert>
-        </div>
-      )}
+        {toast && (
+          <div className="relative mx-auto mt-4 max-w-5xl px-6 md:px-12">
+            <Alert className="border-success/40 bg-success/20 text-success">
+              <AlertDescription className="flex items-center justify-between gap-4">
+                <span>{toast}</span>
+                <Button variant="ghost" size="sm" onClick={() => setToast(null)}>
+                  Dismiss
+                </Button>
+              </AlertDescription>
+            </Alert>
+          </div>
+        )}
 
-      <main className="mx-auto max-w-5xl px-4 py-8">
-        <Outlet />
-      </main>
+        <main className="relative mx-auto flex max-w-5xl flex-col gap-8 px-6 py-8 md:px-12">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 }

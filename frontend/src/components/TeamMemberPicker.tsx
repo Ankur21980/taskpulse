@@ -21,9 +21,9 @@ export function TeamMemberPicker({ members, selectedIds, onChange }: Props) {
   };
 
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader>
-        <CardTitle className="text-sm">Team for this sprint</CardTitle>
+        <CardTitle className="text-base font-semibold text-white">Team for this sprint</CardTitle>
         <CardDescription>
           Named owners in the document are always assigned to that person. Unnamed tasks
           are assigned by role among checked members.

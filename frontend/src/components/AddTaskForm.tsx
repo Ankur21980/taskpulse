@@ -24,7 +24,7 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
   const [priority, setPriority] = useState<"high" | "medium" | "low">("medium");
 
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader>
         <CardTitle className="text-sm">Add task</CardTitle>
       </CardHeader>
@@ -38,23 +38,34 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
           }}
         >
           <Input
-            className="min-w-[200px] flex-1"
+            className="min-w-[200px] flex-1 border-0"
             placeholder="Task title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             autoFocus
           />
           <Select
+            items={[
+              { value: "high", label: "high" },
+              { value: "medium", label: "medium" },
+              { value: "low", label: "low" },
+            ]}
             value={priority}
             onValueChange={(v) => setPriority(v as "high" | "medium" | "low")}
           >
-            <SelectTrigger className="w-[120px]" size="sm">
+            <SelectTrigger className="w-[120px] border-0 bg-[#1a1f2e]" size="sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="high">high</SelectItem>
-              <SelectItem value="medium">medium</SelectItem>
-              <SelectItem value="low">low</SelectItem>
+              <SelectItem value="high" label="high">
+                high
+              </SelectItem>
+              <SelectItem value="medium" label="medium">
+                medium
+              </SelectItem>
+              <SelectItem value="low" label="low">
+                low
+              </SelectItem>
             </SelectContent>
           </Select>
           <AssigneeSelect

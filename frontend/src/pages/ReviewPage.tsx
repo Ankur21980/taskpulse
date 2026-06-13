@@ -194,7 +194,7 @@ export function ReviewPage() {
         <div className="min-w-0 flex-1 space-y-4">
           {activeSource ? (
             <div>
-              <h2 className="text-2xl font-semibold">
+              <h2 className="page-heading">
                 {sourceTitle(
                   activeSource.original_filename,
                   activeSource.type,

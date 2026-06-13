@@ -31,7 +31,7 @@ export function ReviewHistorySidebar({
   );
 
   return (
-    <aside className="w-full shrink-0 border-b border-border pb-4 md:w-60 md:border-b-0 md:border-r md:pr-4 md:pb-0">
+    <aside className="w-full shrink-0 border-b border-[#1f2937] pb-4 md:w-60 md:border-r md:border-b-0 md:pr-4 md:pb-0">
       <h3 className="text-sm font-semibold text-foreground">Review History</h3>
       <div className="mt-2 flex flex-wrap gap-1">
         {(["all", "draft", "completed"] as HistoryFilter[]).map((f) => (
@@ -42,7 +42,7 @@ export function ReviewHistorySidebar({
             variant={filter === f ? "secondary" : "ghost"}
             className={cn(
               "capitalize",
-              filter === f && "bg-primary font-semibold text-primary-foreground"
+              filter === f && "bg-[#2563eb] font-semibold text-white"
             )}
             onClick={() => onFilterChange(f)}
           >
@@ -62,8 +62,8 @@ export function ReviewHistorySidebar({
               className={cn(
                 "w-full rounded-lg border px-3 py-2 text-left transition-colors",
                 activeSourceId === s.id
-                  ? "border-primary/50 bg-primary/30"
-                  : "border-transparent hover:bg-muted"
+                  ? "border-[#2563eb]/50 bg-[#2563eb]/15"
+                  : "border-transparent hover:bg-[#1a1f2e]"
               )}
             >
               <div className="truncate text-sm font-medium">{sourceLabel(s)}</div>

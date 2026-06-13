@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TeamMemberPicker } from "../components/TeamMemberPicker";
+import { ExtractionLoadingOverlay } from "../components/ExtractionLoadingOverlay";
 import { useTaskStore } from "../store/taskStore";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
@@ -57,8 +57,8 @@ export function UploadPage() {
 
   return (
     <div className="space-y-6">
-      <Tabs value={mode} onValueChange={(v) => setMode(v as UploadMode)}>
-        <TabsList variant="line" className="w-full justify-start border-b border-border rounded-none bg-transparent p-0">
+      <Tabs value={mode} onValueChange={(v) => setMode(v as UploadMode)} className="gap-0">
+        <TabsList variant="line" className="w-full justify-start rounded-none border-b border-[#1f2937] bg-transparent p-0 pb-1">
           <TabsTrigger value="transcript" className="rounded-none px-4 py-2">
             Meeting transcript
           </TabsTrigger>
@@ -67,22 +67,24 @@ export function UploadPage() {
           </TabsTrigger>
         </TabsList>
 
-        <TeamMemberPicker
-          members={members}
-          selectedIds={eligibleIds}
-          onChange={setEligibleIds}
-        />
+        <div className="mt-6">
+          <TeamMemberPicker
+            members={members}
+            selectedIds={eligibleIds}
+            onChange={setEligibleIds}
+          />
+        </div>
 
-        <TabsContent value="transcript" className="space-y-6">
+        <TabsContent value="transcript" className="mt-8 space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold">Extract tasks from a meeting</h2>
-            <p className="mt-1 text-muted-foreground">
+            <h2 className="page-heading">Extract tasks from a meeting</h2>
+            <p className="mt-1 text-base leading-6 text-[#9ca3af]">
               Paste notes or upload a transcript (.txt, .vtt, .srt). Gemini will extract action items.
             </p>
           </div>
 
           <Textarea
-            className="h-48 font-mono"
+            className="h-48 border-0 bg-[#111318] font-mono text-[#9ca3af]"
             placeholder="Paste meeting transcript..."
             value={text}
             onChange={(e) => setText(e.target.value)}
@@ -117,19 +119,19 @@ export function UploadPage() {
           </div>
         </TabsContent>
 
-        <TabsContent value="prd" className="space-y-6">
+        <TabsContent value="prd" className="mt-8 space-y-6">
           <div>
-            <h2 className="text-2xl font-semibold">Extract tasks from a PRD</h2>
-            <p className="mt-1 text-muted-foreground">
+            <h2 className="page-heading">Extract tasks from a PRD</h2>
+            <p className="mt-1 text-base leading-6 text-[#9ca3af]">
               Upload a Product Requirements Document (.pdf, .docx). Tasks, owners, and feature areas are extracted automatically.
             </p>
           </div>
 
           <label
             className={cn(
-              "flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-border p-12 transition-colors",
+              "flex cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#1f2937] bg-[#111318] p-12 transition-colors",
               canExtract
-                ? "hover:border-primary/60 hover:bg-primary/15"
+                ? "hover:border-[#2563eb]/60 hover:bg-[#1a1f2e]"
                 : "cursor-not-allowed opacity-50"
             )}
           >
@@ -156,11 +158,7 @@ export function UploadPage() {
         <p className="text-sm text-warning font-medium">Select at least one team member to extract tasks.</p>
       )}
 
-      {loading && (
-        <Alert className="border-primary/50 bg-primary/25 text-foreground">
-          <AlertDescription>{loadingMsg}</AlertDescription>
-        </Alert>
-      )}
+      {loading && <ExtractionLoadingOverlay message={loadingMsg} />}
 
       {error && <p className="text-destructive">{error}</p>}
     </div>
