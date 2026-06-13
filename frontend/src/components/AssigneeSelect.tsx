@@ -28,7 +28,7 @@ export function AssigneeSelect({ members, value, hint, disabled = false, onChang
       disabled={disabled}
       onValueChange={(id) => onChange(id ?? "")}
     >
-      <SelectTrigger className="w-[200px]" size="sm">
+      <SelectTrigger className="w-[200px] border-0 bg-[#1a1f2e]" size="sm">
         <SelectValue placeholder="Select assignee" />
       </SelectTrigger>
       <SelectContent>

@@ -24,7 +24,7 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
   const [priority, setPriority] = useState<"high" | "medium" | "low">("medium");
 
   return (
-    <Card>
+    <Card className="border-0">
       <CardHeader>
         <CardTitle className="text-sm">Add task</CardTitle>
       </CardHeader>
@@ -38,7 +38,7 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
           }}
         >
           <Input
-            className="min-w-[200px] flex-1"
+            className="min-w-[200px] flex-1 border-0"
             placeholder="Task title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -48,7 +48,7 @@ export function AddTaskForm({ members, onSubmit, onCancel }: Props) {
             value={priority}
             onValueChange={(v) => setPriority(v as "high" | "medium" | "low")}
           >
-            <SelectTrigger className="w-[120px]" size="sm">
+            <SelectTrigger className="w-[120px] border-0 bg-[#1a1f2e]" size="sm">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>

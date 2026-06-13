@@ -5,7 +5,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Color Hunt palette: https://colorhunt.co/palette/1118444b56947288aeeae0cf */
 @theme inline {
   --font-heading: var(--font-sans);
   --font-sans: "Geist Variable", sans-serif;
@@ -63,70 +62,72 @@
 }
 
 :root {
-  /* Anchor colors (user-specified) */
-  --palette-primary-bg: #111844;
-  --palette-secondary-bg: #4b5694;
-  --palette-border: #7288ae;
-  --palette-text: #eae0cf;
+  --palette-bg: #000000;
+  --palette-surface: #111318;
+  --palette-elevated: #1a1f2e;
+  --palette-border: #1f2937;
+  --palette-text: #ffffff;
+  --palette-muted: #9ca3af;
+  --palette-accent: #2563eb;
+  --palette-accent-hover: #1d4ed8;
 
-  /* Derived elevation shades */
-  --palette-deep-bg: #0e1440;
-  --palette-card-bg: #1a2255;
-
-  --background: var(--palette-primary-bg);
+  --background: var(--palette-bg);
   --foreground: var(--palette-text);
 
-  --card: var(--palette-card-bg);
+  --card: var(--palette-surface);
   --card-foreground: var(--palette-text);
 
-  --popover: var(--palette-card-bg);
+  --popover: var(--palette-surface);
   --popover-foreground: var(--palette-text);
 
-  /* CTAs — cream fill with navy label */
-  --primary: var(--palette-text);
-  --primary-foreground: var(--palette-primary-bg);
+  --primary: var(--palette-accent);
+  --primary-foreground: #ffffff;
 
-  --highlight: var(--palette-text);
-  --highlight-foreground: var(--palette-primary-bg);
+  --highlight: var(--palette-accent);
+  --highlight-foreground: #ffffff;
 
-  --secondary: var(--palette-secondary-bg);
+  --secondary: var(--palette-elevated);
   --secondary-foreground: var(--palette-text);
 
-  --muted: var(--palette-card-bg);
-  --muted-foreground: rgba(234, 224, 207, 0.55);
+  --muted: var(--palette-elevated);
+  --muted-foreground: var(--palette-muted);
 
-  --accent: var(--palette-secondary-bg);
+  --accent: var(--palette-elevated);
   --accent-foreground: var(--palette-text);
 
-  --destructive: #c0505a;
-  --destructive-foreground: var(--palette-text);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
 
-  --success: #5aaa85;
-  --success-foreground: var(--palette-primary-bg);
+  --success: #10b981;
+  --success-foreground: #ffffff;
 
-  --warning: #c4984a;
-  --warning-foreground: var(--palette-primary-bg);
+  --warning: #f59e0b;
+  --warning-foreground: #ffffff;
 
   --border: var(--palette-border);
   --input: var(--palette-border);
-  --ring: var(--palette-border);
+  --ring: rgba(37, 99, 235, 0.5);
 
-  --chart-1: var(--palette-border);
-  --chart-2: var(--palette-secondary-bg);
-  --chart-3: var(--palette-text);
-  --chart-4: #5aaa85;
-  --chart-5: #c4984a;
+  --chart-1: var(--palette-accent);
+  --chart-2: #3b82f6;
+  --chart-3: var(--palette-muted);
+  --chart-4: var(--success);
+  --chart-5: var(--warning);
 
   --radius: 0.625rem;
 
-  --sidebar: var(--palette-deep-bg);
+  --sidebar: var(--palette-bg);
   --sidebar-foreground: var(--palette-text);
-  --sidebar-primary: var(--palette-text);
-  --sidebar-primary-foreground: var(--palette-primary-bg);
-  --sidebar-accent: var(--palette-secondary-bg);
+  --sidebar-primary: var(--palette-accent);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--palette-elevated);
   --sidebar-accent-foreground: var(--palette-text);
   --sidebar-border: var(--palette-border);
-  --sidebar-ring: var(--palette-border);
+  --sidebar-ring: var(--ring);
+
+  --shadow-card: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+  --shadow-primary: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-primary-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 @layer base {
@@ -134,12 +135,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply text-foreground antialiased;
-    background-color: var(--background);
-    background-image:
-      radial-gradient(ellipse 80% 60% at 85% 10%, rgba(75, 86, 148, 0.35) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 50% at 10% 90%, rgba(114, 136, 174, 0.15) 0%, transparent 55%);
-    background-attachment: fixed;
+    @apply bg-black text-white antialiased;
   }
   html {
     @apply font-sans;
@@ -148,6 +144,16 @@
   h2,
   h3,
   h4 {
-    @apply text-highlight;
+    @apply text-white;
+  }
+}
+
+@layer components {
+  .app-background {
+    @apply bg-black;
+  }
+
+  .page-heading {
+    @apply text-3xl font-bold leading-9 text-[#2563eb];
   }
 }

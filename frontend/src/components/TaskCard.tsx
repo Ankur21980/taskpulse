@@ -44,13 +44,14 @@ export function TaskCard({
   return (
     <Card
       className={cn(
-        highlighted && "border-destructive ring-2 ring-destructive/40"
+        "border-0",
+        highlighted && "ring-2 ring-destructive/40"
       )}
     >
       <CardContent className="space-y-4 pt-4">
         <div className="flex items-start justify-between gap-4">
           <Input
-            className="flex-1 border-border bg-background font-medium text-foreground shadow-none focus-visible:ring-ring"
+            className="flex-1 border-0 bg-[#111318] font-medium text-white shadow-none focus-visible:ring-[#2563eb]/30"
             value={task.title}
             onChange={(e) => onUpdate(task.id, e.target.value)}
           />
